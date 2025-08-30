@@ -1,7 +1,7 @@
 
-# Storied
+# StoryHub
 
-Storied is a full-stack MERN web application for sharing, discovering, and managing stories. Users can sign up, build profiles, and create, update, or delete their own stories. All stories are publicly readable, so visitors can browse without logging in. The platform features:
+StoryHub is a full-stack MERN web application for sharing, discovering, and managing stories. Users can sign up, build profiles, and create, update, or delete their own stories. All stories are publicly readable, so visitors can browse without logging in. The platform features:
 
 - User authentication and profile management
 - Create, edit, delete, and like stories
