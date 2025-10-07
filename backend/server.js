@@ -39,9 +39,8 @@ const __dirname = path.dirname(__filename)
 const distPath = path.resolve(__dirname, '../frontend/dist')
 app.use(express.static(distPath))
 
-// SPA fallback for routes not starting with /api
-app.get('*', (req, res, next) => {
-  if (req.path.startsWith('/api')) return next()
+// SPA fallback for routes not starting with /api (Express 5-safe regex)
+app.get(/^\/(?!api).*/, (req, res) => {
   res.sendFile(path.join(distPath, 'index.html'))
 })
 
