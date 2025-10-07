@@ -18,7 +18,7 @@ const ViewPage = () => {
 
     async function fetchStory() {
       try {
-        const response = await fetch(`http://localhost:3000/story/${id}`)
+        const response = await fetch(`/api/story/${id}`)
         if (!response.ok) throw new Error('Story not found')
         const data = await response.json()
         setStory(data)
@@ -45,7 +45,7 @@ const ViewPage = () => {
       return;
     }
     try {
-      const response = await fetch(`http://localhost:3000/story/${id}/like`, {
+      const response = await fetch(`/api/story/${id}/like`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

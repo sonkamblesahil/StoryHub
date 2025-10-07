@@ -36,7 +36,7 @@ const StoryCard = ({ story, showActions }) => {
   const handleDelete = async () => {
     if (window.confirm('Are you sure you want to delete this story?')) {
       try {
-        const response = await fetch(`http://localhost:3000/${story._id}`, {
+      const response = await fetch(`/api/${story._id}`, {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json',
@@ -58,7 +58,7 @@ const StoryCard = ({ story, showActions }) => {
     if (!user) return;
     setLikeLoading(true);
     try {
-      const response = await fetch(`http://localhost:3000/story/${story._id}/like`, {
+      const response = await fetch(`/api/story/${story._id}/like`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

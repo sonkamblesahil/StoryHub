@@ -16,12 +16,21 @@ const CreatePage = () => {
 
   // Auto-fill author from logged-in user
   useEffect(() => {
-    const userData = localStorage.getItem('user')
-    const user = userData ? JSON.parse(userData) : null
-    if (user?.name) {
-      setFormData(prev => ({ ...prev, author: user.name }))
+    try {
+      const userData = localStorage.getItem('user')
+      const user = userData ? JSON.parse(userData) : null
+      if (user?.username) {
+        setFormData(prev => ({ ...prev, author: user.username }))
+      } else {
+        // If user data is missing or corrupted, redirect to login
+        console.warn('User data missing or invalid, redirecting to login')
+        navigate('/login')
+      }
+    } catch (error) {
+      console.error('Error parsing user data from localStorage:', error)
+      navigate('/login')
     }
-  }, [])
+  }, [navigate])
 
   useEffect(() => {
     const user = localStorage.getItem('user');
@@ -56,6 +65,10 @@ const CreatePage = () => {
       setError('Content must be at least 50 characters long')
       return false
     }
+    if (!formData.author.trim()) {
+      setError('Author information is missing. Please refresh and log in again.')
+      return false
+    }
     return true
   }
 
@@ -72,14 +85,33 @@ const CreatePage = () => {
 
     try {
       const userData = localStorage.getItem('user')
-      const user = userData ? JSON.parse(userData) : null
-
-      const storyData = {
-        ...formData,
-        owner: user?.id || null
+      let user = null
+      
+      try {
+        user = userData ? JSON.parse(userData) : null
+      } catch (parseError) {
+        console.error('Error parsing user data:', parseError)
+        setError('User session invalid. Please log in again.')
+        navigate('/login')
+        return
       }
 
-      const response = await fetch('http://localhost:3000/create', {
+      if (!user?.id || !user?.username) {
+        setError('User session invalid. Please log in again.')
+        navigate('/login')
+        return
+      }
+
+      // Ensure author is set
+      const authorName = formData.author || user.username
+      
+      const storyData = {
+        ...formData,
+        author: authorName,
+        owner: user.id
+      }
+
+      const response = await fetch('/api/create', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

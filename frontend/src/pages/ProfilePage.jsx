@@ -32,13 +32,13 @@ const ProfilePage = () => {
 
   const fetchUserStories = async (userId) => {
     try {
-      const response = await fetch(`http://localhost:3000/user/${userId}/stories`)
+      const response = await fetch(`/api/user/${userId}/stories`)
       if (response.ok) {
         const stories = await response.json()
         setUserStories(stories)
       } else {
         // Fallback: fetch all stories and filter by owner
-        const allStoriesResponse = await fetch('http://localhost:3000/')
+        const allStoriesResponse = await fetch('/api/')
         if (allStoriesResponse.ok) {
           const allStories = await allStoriesResponse.json()
           const filteredStories = allStories.filter(story => story.owner === userId)

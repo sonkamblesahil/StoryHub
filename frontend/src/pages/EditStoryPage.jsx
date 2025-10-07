@@ -14,7 +14,7 @@ const EditStoryPage = () => {
   useEffect(() => {
     async function fetchStory() {
       try {
-        const response = await fetch(`http://localhost:3000/story/${id}`);
+        const response = await fetch(`/api/story/${id}`);
         if (!response.ok) throw new Error('Story not found');
         const data = await response.json();
         setStory(data);
@@ -42,7 +42,7 @@ const EditStoryPage = () => {
     e.preventDefault();
     setError('');
     try {
-      const response = await fetch(`http://localhost:3000/${id}`, {
+      const response = await fetch(`/api/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

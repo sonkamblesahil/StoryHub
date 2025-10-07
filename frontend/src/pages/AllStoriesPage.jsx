@@ -46,7 +46,7 @@ const AllStoriesPage = () => {
 
   const fetchStories = async () => {
     try {
-      const response = await fetch('http://localhost:3000/')
+      const response = await fetch('/api/')
       if (response.ok) {
         const data = await response.json()
         setStories(data)

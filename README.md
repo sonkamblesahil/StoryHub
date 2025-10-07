@@ -12,7 +12,7 @@ StoryHub is a full-stack MERN web application for sharing, discovering, and mana
 
 ---
 
-## Installation
+## Installation & Development
 
 Follow these steps to set up Storied locally:
 
@@ -35,12 +35,12 @@ Follow these steps to set up Storied locally:
    ```
 
 4. **Set up environment variables:**
-   - Create a `.env` file in both `backend` and `frontend` folders as needed.
+   - Create a `.env` file in `backend` using `.env.example` as reference.
    - Example for backend:
      ```env
-     MONGO_URI=your_mongodb_connection_string
-     JWT_SECRET=your_jwt_secret
      PORT=3000
+     MONGO_URL=your_mongodb_connection_string
+     CLIENT_URL=http://localhost:5173
      ```
 
 5. **Run the backend server:**
@@ -49,11 +49,29 @@ Follow these steps to set up Storied locally:
    npm start
    ```
 
-6. **Run the frontend app:**
+6. **Run the frontend app (dev):**
    ```bash
    cd ../frontend
    npm run dev
    ```
+
+---
+
+## Production build & serve
+
+1. Build the frontend:
+   ```bash
+   cd frontend
+   npm install
+   npm run build
+   ```
+2. Start the backend (serves `frontend/dist` and mounts API under `/api`):
+   ```bash
+   cd ../backend
+   npm install
+   npm run start
+   ```
+3. Set `CLIENT_URL` to your deployed origin(s). Multiple origins can be comma-separated.
 
 
 ## Features
