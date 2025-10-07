@@ -5,19 +5,30 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
+# Optional PnP
+.pnp.cjs
+.pnp.js
+
 # Build output
 dist/
 build/
+
+# Vite cache
+node_modules/.vite/
 
 # Logs
 logs/
 *.log
 
+# Test coverage
+coverage/
+.nyc_output/
+
 # OS files
 .DS_Store
 Thumbs.db
 
-# Editor files
+# Editor / IDE
 .vscode/
 .idea/
 *.suo
@@ -26,29 +37,23 @@ Thumbs.db
 *.sln
 *.sw?
 
-# Environment files
+# Environment files (don't commit secrets)
 .env
 .env.local
-.env.development.local
-.env.test.local
-.env.production.local
+.env.*.local
+
+# Monorepo service folders
+/backend/node_modules/
+/frontend/node_modules/
+/backend/dist/
+/frontend/dist/
+/backend/.env
+/frontend/.env
 
 # Misc
-coverage/
-
-# Backend
-backend/node_modules/
-backend/dist/
-backend/.env
-
-# Frontend
-frontend/node_modules/
-frontend/dist/
-frontend/.env
-
-# Others
 *.local
 
-# Ignore package-lock if needed
-package-lock.json
-yarn.lock
+# DO NOT ignore lockfiles - commit them for deterministic installs
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
