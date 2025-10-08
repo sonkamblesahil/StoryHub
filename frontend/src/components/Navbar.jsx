@@ -33,7 +33,7 @@ const Navbar = () => {
             className="flex items-center gap-2 text-white font-extrabold text-2xl tracking-wide"
           >
             <span className="w-10 h-10 flex items-center justify-center bg-yellow-300 rounded-full text-indigo-900 font-bold">
-              sttt
+              ST
             </span>
             <span>Story Hub</span>
           </Link>
